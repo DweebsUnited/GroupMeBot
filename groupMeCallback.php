@@ -14,7 +14,9 @@ include( './config.php' );
 // Get the message contents, decode the json, and lowercase the whole thing ( makes matching much easier )
 $cont = file_get_contents( "php://input" );
 $json = json_decode( $cont );
-$msgText = strtolower( $json->text );
+$msgText = strtolower( $json->text ); // NOTE NOTE NOTE NOTE NOTE NOTE NOTE NOTE
+// The message text is lower cased to make patterns easier to match!
+// For case sensitive matches, use $json->text !
 $usrName = $json->name
 
 // This is the word array of the whole message
@@ -39,6 +41,9 @@ if ( substr( $command[ 0 ], 0, 1 ) == ":" ){
 // And this is the ugly syntax for checking for keywords in messages. I don't like it, but I don't know a better way
 } else if ( substr_count( $msgText, "(.)(.)" ) > 0 ){
     sendMsg( "BOOBIES" );
+// Here's the same thing, but with a case-sensitive keyword
+} else if ( substr_count( $msgText, "Oblivion!" ) > 0 ){
+    sendMsg( "ONLY A DAEDRIC LORD MAY COMMAND THE PLANES OF OBLIVION. GO AWAY." );
 }
 
 // Send a message from the bot to the group it's registered in. bot_token comes from config.php
