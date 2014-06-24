@@ -11,6 +11,13 @@
 include( './httpful.phar' );
 include( './config.php' );
 
+//Chatterbot api is located here: https://code.google.com/p/chatter-bot-api/
+require 'chatterbotapi.php';
+$factory = new ChatterBotFactory();
+
+$bot1 = $factory->create(ChatterBotType::CLEVERBOT);
+$bot1session = $bot1->createSession();
+
 // Get the message contents, decode the json, and lowercase the whole thing ( makes matching much easier )
 $cont = file_get_contents( "php://input" );
 $json = json_decode( $cont );
@@ -35,6 +42,10 @@ if ( substr( $command[ 0 ], 0, 1 ) == ":" ){
             break;
         case "google": // Google search
             sendMsg( "https://google.com/search?q=" . implode( '+', array_slice( $command, 1 ) ) );
+            break;
+        case "claptrap": // Cleverbot Response
+            $response = $bot1session->think($command);
+            sendMsg( $response );
             break;
     }
 
