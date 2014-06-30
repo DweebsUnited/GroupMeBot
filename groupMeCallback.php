@@ -26,6 +26,7 @@ $usrName = $json->name
 // This is the word array of the whole message
 $command = explode( ' ', $msgText );
 
+$quipList = array("I'm different!"); //Why do I always forget semi colons??
 
 // Check the very first letter for a colon
 if ( substr( $command[ 0 ], 0, 1 ) == ":" ){
@@ -47,6 +48,12 @@ if ( substr( $command[ 0 ], 0, 1 ) == ":" ){
             $response = $bot1session->think($command);
             sendMsg( $response );
             break;
+        case "roulette": // Would you like to play a game??
+            $quip = array_rand($quipList)
+            sendMsg ($quip)
+            break;
+        case "addtoroulette":
+            sendMSG ("This feature hasn't been implemented yet, stop judging poor clapTrap")
     }
 
 // And this is the ugly syntax for checking for keywords in messages. I don't like it, but I don't know a better way
