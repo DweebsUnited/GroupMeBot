@@ -12,5 +12,6 @@ To add additional functionality: Expand the switch statment with any other : com
 ==========
 
 The config.php file that needs to exist in the same directory as the callback needs to define the following:
-
+```php
 $bot_token = "bot token from GroupMe bot registration page"
+```
